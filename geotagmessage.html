@@ -1,0 +1,63 @@
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+  <title>Geotag a message</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+</head>
+
+<body>
+  <div class="container">
+  {{> location}}
+    <header>
+      <form class="new-message">
+        <div class="input-group input-group-lg">
+          <span class="input-group-addon" id="basic-addon1">
+            <span class="glyphicon glyphicon-console" aria-hidden="true"></span>
+          </span>
+          <input type="text" class="form-control" name="message" placeholder="Message" aria-describedby="basic-addon1">
+        </div>
+      </form>
+    </header>
+    <div class="page-header">
+      <h1>Nearby Messages</h1>
+    </div>
+    <div class="panel panel-default">
+      <ul class="list-group">
+        {{#each messages}}
+          {{> message}}
+        {{/each}}
+      </ul>
+    </div>
+  </div>
+</body>
+
+<template name="message">
+  <li class="list-group-item">
+    <h4 class="list-group-item-heading">
+      {{text}}
+    </h4>
+    <p class="list-group-item-text">
+      <span class="glyphicon glyphicon-globe" aria-hidden="true"></span>
+      {{latitude}}, {{longitude}}<br />
+      <span class="glyphicon glyphicon-time" aria-hidden="true"></span>
+      {{created_at}}
+    </p>
+  </li>
+</template>
+
+<template name="location">
+  <div class="jumbotron">
+    <center><h1>Geotag a Message!</h1></center>
+    <center><img src="https://maps.googleapis.com/maps/api/staticmap?center={{latitude}},{{longitude}}&zoom=14&size=400x300&maptype=terrain&markers=size:mid%7C{{latitude}},{{longitude}}" alt="Your Location" /></center><br />
+    <center>
+        <span class="glyphicon glyphicon-globe" aria-hidden="true"></span>
+        {{latitude}}, {{longitude}}
+    </center>
+  </div>
+</template>
